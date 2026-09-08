@@ -14,10 +14,27 @@ defmodule TodopocWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api/json" do
+    pipe_through [:api]
+
+    forward "/swaggerui", OpenApiSpex.Plug.SwaggerUI,
+      path: "/api/json/open_api",
+      default_model_expand_depth: 4
+
+    forward "/", TodopocWeb.AshJsonApiRouter
+  end
+
   scope "/", TodopocWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/todos", TodoLive.Index, :index
+    live "/todos/new", TodoLive.Form, :new
+    live "/todos/:id/edit", TodoLive.Form, :edit
+
+    live "/todos/:id", TodoLive.Show, :show
+    live "/todos/:id/show/edit", TodoLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
