@@ -1,4 +1,14 @@
-/deps/
 /_build/
 /deps/
 /assets/node_modules/
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Ignore assets that are produced by build tools.
+/priv/static/assets/
+
+# Local SQLite databases.
+*.db
+*.db-shm
+*.db-wal
