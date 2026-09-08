@@ -33,7 +33,6 @@ defmodule TodopocWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug AshPhoenix.Plug.CheckCodegenStatus
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :todopoc
   end
 
@@ -45,7 +44,7 @@ defmodule TodopocWeb.Endpoint do
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
   plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json, AshJsonApi.Plug.Parser],
+    parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 

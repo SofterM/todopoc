@@ -1,10 +1,5 @@
 defmodule Todopoc.Repo do
-  use AshSqlite.Repo,
-    otp_app: :todopoc
-
-  # Let Ash wrap write actions in a transaction, so a multi-step action
-  # rolls back as a unit. Requires a non-zero `busy_timeout`, which the
-  # driver sets by default.
-  @impl true
-  def write_transactions?, do: true
+  use Ecto.Repo,
+    otp_app: :todopoc,
+    adapter: Ecto.Adapters.SQLite3
 end
